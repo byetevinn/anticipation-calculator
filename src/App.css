@@ -11,5 +11,5 @@
 @media (min-width: 720px) {
   .App {
     flex-direction: row;
-  }
+  };
 }

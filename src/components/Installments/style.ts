@@ -43,6 +43,8 @@ export const StyledDiv = styled.div`
     }
   }
   @media (min-width: 720px) {
+    width: 300px;
+
     padding: 110px 0px;
   }
 `;

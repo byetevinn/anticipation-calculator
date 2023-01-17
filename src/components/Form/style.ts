@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const StyledDiv = styled.div`
-  width: 100%;
-  height: 100%;
-
   h1 {
     text-align: center;
 
@@ -67,6 +64,14 @@ export const StyledDiv = styled.div`
           outline: none;
         }
       }
+    }
+  }
+
+  @media (min-width: 720px) {
+    width: 450px;
+
+    h1 {
+      width: max-content;
     }
   }
 `;
