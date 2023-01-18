@@ -3,14 +3,17 @@ import Form from "./components/Form";
 
 import GlobalStyle from "./styles/GlobalStyle";
 import "./App.css";
+import ReceiveProvider from "./contexts/ReceiveContext";
 
 function App() {
   return (
-    <div className="App">
-      <GlobalStyle />
-      <Form />
-      <Installments />
-    </div>
+    <ReceiveProvider>
+      <div className="App">
+        <GlobalStyle />
+        <Form />
+        <Installments />
+      </div>
+    </ReceiveProvider>
   );
 }
 

@@ -1,6 +1,8 @@
 import { StyledDiv } from "./style";
 
 function Installments() {
+  
+
   return (
     <StyledDiv>
       <h2>VOCÊ RECEBERÁ:</h2>
