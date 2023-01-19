@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ReceiveContext } from "../../contexts/ReceiveContext";
 import { StyledDiv } from "./style";
 import { useForm } from "react-hook-form";
@@ -7,14 +7,38 @@ import { IReciveProps } from "./interfaces";
 function Form() {
   const { register, handleSubmit } = useForm();
   const [inputValue, setInputValue] = useState({} as IReciveProps);
+  const [saleValue, setSaleValue] = useState(String);
 
   const { getReceive } = useContext(ReceiveContext);
 
   const onSubmit = (data: any) => {
-    setInputValue(data);
+    setInputValue({ ...data });
   };
 
-  getReceive(inputValue);
+  const onSale = (data: any) => {
+    valueBRL(parseInt(data.target.value));
+  };
+
+  useEffect(() => {
+    const count = setTimeout(() => {
+      getReceive(inputValue);
+    }, 600);
+
+    return () => clearTimeout(count);
+  }, [inputValue]);
+
+  const valueBRL = (value: Number) => {
+    const newValue = value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+    setSaleValue(newValue);
+
+    const input: any = document.getElementById("amount");
+  };
+
+  /* console.log(saleValue); */
 
   return (
     <StyledDiv>
@@ -23,7 +47,13 @@ function Form() {
         <ul>
           <li>
             <p>Informe o valor da venda</p>
-            <input type="number" {...register("amount")} />
+            <input
+              type="number"
+              {...register("amount")}
+              placeholder="R$ 0,00"
+              onChange={onSale}
+              id="amount"
+            />
           </li>
           <li>
             <p>Em quantas parcelas</p>

@@ -7,7 +7,7 @@ export interface IReciveProps {
   days?: string;
 }
 
-export interface IReceiveResponse {
+export interface IInstallments {
   1: number;
   15: number;
   30: number;
@@ -16,6 +16,7 @@ export interface IReceiveResponse {
 
 export interface IReceiveContext {
   getReceive: (data: IReciveProps) => void;
+  installments: IInstallments;
 }
 
 export interface IReceiveContextProps {

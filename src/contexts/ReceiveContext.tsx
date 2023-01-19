@@ -1,10 +1,10 @@
 import {
   IReceiveContext,
   IReceiveContextProps,
-  IReceiveResponse,
+  IInstallments,
   IReciveProps,
 } from "./interfaces";
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import api from "../services/api";
 
 export const ReceiveContext = createContext<IReceiveContext>(
@@ -12,16 +12,19 @@ export const ReceiveContext = createContext<IReceiveContext>(
 );
 
 const ReceiveProvider = ({ children }: IReceiveContextProps) => {
+  const [installments, setInstallments] = useState({} as IInstallments);
+
   async function getReceive(data: IReciveProps) {
     return await api
-      .post<IReceiveResponse>("", { data })
-      .then((response) => console.log(response))
-      .then((response) => response)
-      .catch((error) => console.log(error));
+      .post<IInstallments>("", data)
+      .then((response) => setInstallments(response.data))
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
-    <ReceiveContext.Provider value={{ getReceive }}>
+    <ReceiveContext.Provider value={{ getReceive, installments }}>
       {children}
     </ReceiveContext.Provider>
   );

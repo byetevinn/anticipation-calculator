@@ -45,8 +45,8 @@ export const StyledDiv = styled.div`
         }
 
         input {
-          width: 200px;
-          height: 20px;
+          width: 300px;
+          height: 30px;
 
           border: 1px solid var(--color-third);
           border-radius: 4px;
@@ -57,10 +57,10 @@ export const StyledDiv = styled.div`
         }
 
         input:hover {
-          border: 1px solid var(--color-secondary);
+          border: 1px solid var(--input-border);
         }
         input:focus {
-          border: 1px solid var(--color-secondary);
+          border: 1px solid var(--input-border);
           outline: none;
         }
       }
