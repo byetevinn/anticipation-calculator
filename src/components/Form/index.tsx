@@ -1,17 +1,18 @@
 import { ChangeEventHandler, useContext, useEffect, useState } from "react";
+import { validationSchema } from "../../validators/formValidation";
 import { ReceiveContext } from "../../contexts/ReceiveContext";
-import { StyledDiv } from "./style";
 import { IReciveProps } from "./interfaces";
+import { StyledDiv } from "./style";
 
 function Form() {
   const [inputValue, setInputValue] = useState({} as IReciveProps);
-  const [saleValue, setSaleValue] = useState(String || Number);
+  const [saleValue, setSaleValue] = useState(String);
 
   const { getReceive } = useContext(ReceiveContext);
 
-  const onSubmit: ChangeEventHandler<HTMLInputElement> = (data) => {
-    const name = data.target.name;
-    const value = data.target.value;
+  const onSubmit: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const name = event.target.name;
+    const value = parseInt(event.target.value);
 
     if (name === "installments") {
       setInputValue({ ...inputValue, installments: value });
@@ -20,14 +21,24 @@ function Form() {
     }
   };
 
-  const onSale: ChangeEventHandler<HTMLInputElement> = (data) => {
-    let value = stringToNumber(data.target.value);
+  const onSale: ChangeEventHandler<HTMLInputElement> = (event) => {
+    let value = stringToNumber(event.target.value);
 
-    const amount = value.toString();
+    const amount = value;
 
     setInputValue({ ...inputValue, amount });
 
     valueBRL(value);
+  };
+
+  const validationForm = async () => {
+    try {
+      await validationSchema.validate({ ...inputValue }, { abortEarly: true });
+
+      getReceive(inputValue);
+    } catch (err) {
+      throw err;
+    }
   };
 
   const stringToNumber = (value: String) => {
@@ -45,13 +56,7 @@ function Form() {
 
   useEffect(() => {
     const count = setTimeout(() => {
-      const objValues = Object.values(inputValue);
-
-      if (objValues.length >= 3) {
-        if (objValues.every((value) => value !== "")) {
-          getReceive(inputValue);
-        }
-      }
+      validationForm();
     }, 600);
 
     return () => clearTimeout(count);

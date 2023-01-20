@@ -1,6 +1,6 @@
 export interface IReciveProps {
-  amount: string;
-  installments: string;
-  mdr: string;
+  amount: number;
+  installments: number;
+  mdr: number;
   days?: string;
 }
