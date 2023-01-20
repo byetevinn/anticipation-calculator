@@ -5,7 +5,8 @@ export const validationSchema = yup.object().shape({
     .number()
     .required("Informe o percentual de MDR")
     .typeError("Informe o percentual de MDR")
-    .positive("Precisa ser um número positivo"),
+    .positive("Precisa ser um número positivo")
+    .max(100, "O percentual máximo é 100"),
   installments: yup
     .number()
     .required("Informe o número de parcelas")
