@@ -40,7 +40,11 @@ function Form() {
       getReceive(inputValue);
     } catch (err: any) {
       console.log(err);
-      toast.error(err.message, { autoClose: 1000, theme: "dark" });
+
+      const obj = Object.keys(inputValue);
+
+      obj.length > 0 &&
+        toast.error(err.message, { autoClose: 1000, theme: "dark" });
     }
   };
 
