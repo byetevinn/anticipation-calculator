@@ -1,7 +1,9 @@
 import { ChangeEventHandler, useContext, useEffect, useState } from "react";
 import { validationSchema } from "../../validators/formValidation";
 import { ReceiveContext } from "../../contexts/ReceiveContext";
+import "react-toastify/dist/ReactToastify.css";
 import { IReciveProps } from "./interfaces";
+import { toast } from "react-toastify";
 import { StyledDiv } from "./style";
 
 function Form() {
@@ -36,8 +38,13 @@ function Form() {
       await validationSchema.validate({ ...inputValue }, { abortEarly: true });
 
       getReceive(inputValue);
-    } catch (err) {
-      throw err;
+    } catch (err: any) {
+      console.log(err);
+
+      const obj = Object.keys(inputValue);
+
+      obj.length > 0 &&
+        toast.error(err.message, { autoClose: 1000, theme: "dark" });
     }
   };
 
@@ -45,7 +52,9 @@ function Form() {
     return parseInt(value.replace(/[^0-9]/g, "")) / 100;
   };
 
-  const valueBRL = (value: Number) => {
+  const valueBRL = (value: number) => {
+    value = isNaN(value) ? 0.0 : value;
+
     const newValue = value.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
