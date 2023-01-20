@@ -7,6 +7,8 @@ export default createGlobalStyle`
     --color-secondary: #3D75BB;
     --color-third: #DDE6E9;
 	--color-fourth: #5D9CEC;
+
+	--input-border: #66AFE9;
   }
 
 html, body, div, span, applet, object, iframe,
