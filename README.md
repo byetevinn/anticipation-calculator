@@ -1,6 +1,6 @@
 ## Sobre o projeto
 
-O projeto é uma calculadora para mostrar o desconto que o cliente vai ter em antecipar suas parcelas.
+O projeto é uma calculadora para mostrar o valor com desconto que o cliente vai ter em antecipar suas parcelas.
 
 
 ## Como instalar e rodar a aplicação
