@@ -1,7 +1,9 @@
 import { ChangeEventHandler, useContext, useEffect, useState } from "react";
 import { validationSchema } from "../../validators/formValidation";
 import { ReceiveContext } from "../../contexts/ReceiveContext";
+import "react-toastify/dist/ReactToastify.css";
 import { IReciveProps } from "./interfaces";
+import { toast } from "react-toastify";
 import { StyledDiv } from "./style";
 
 function Form() {
@@ -36,8 +38,9 @@ function Form() {
       await validationSchema.validate({ ...inputValue }, { abortEarly: true });
 
       getReceive(inputValue);
-    } catch (err) {
-      throw err;
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err.message, { autoClose: 1000, theme: "dark" });
     }
   };
 
