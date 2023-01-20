@@ -48,7 +48,9 @@ function Form() {
     return parseInt(value.replace(/[^0-9]/g, "")) / 100;
   };
 
-  const valueBRL = (value: Number) => {
+  const valueBRL = (value: number) => {
+    value = isNaN(value) ? 0.0 : value;
+
     const newValue = value.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
